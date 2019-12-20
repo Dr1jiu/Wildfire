@@ -64,18 +64,14 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 员工管理</span></a>
                     <dl class="layui-nav-child">
+
                         <dd>
-                            <a href="javascript:;" kit-target
-                               data-options="{url:'mains.jsp',icon:'&#xe6c6;',title:'公司结构',id:'1'}">
-                                <i class="layui-icon">&#xe6c6;</i><span> 公司结构</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" data-url="employee.jsp" data-icon="fa-user" data-title="查询员工信息" kit-target
+                            <a href="javascript:;" data-url="employee.html" data-icon="fa-user" data-title="查询员工信息" kit-target
                                data-id='2'>
                                 <i class="fa fa-user" aria-hidden="true"></i><span> 查询员工信息</span></a>
                         </dd>
                         <dd>
-                            <a href="javascript:;" data-url="/depart" data-icon="&#xe614;" data-title="添加员工信息"
+                            <a href="javascript:;" data-url="employeeadd.html" data-icon="&#xe614;" data-title="添加员工信息"
                                kit-target data-id='4'><i class="layui-icon">&#xe614;</i><span> 添加员工信息</span></a>
                         </dd>
                     </dl>
@@ -84,12 +80,13 @@
                     <a href="javascript:;"><i class="fa fa-user" aria-hidden="false"></i><span> 车辆管理</span></a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" data-url="vehicle.jsp" data-icon="fa-user" data-title="查询车辆信息" kit-target
+                            <a href="javascript:;" data-url="vehicle.html" data-icon="fa-user" data-title="查询车辆信息" kit-target
                                data-id='5'>
                                 <i class="fa fa-user" aria-hidden="true"></i><span> 查询车辆信息</span></a>
                         </dd>
                         <dd>
-                            <a href="javascript:;" data-url="/vehicle" data-icon="&#xe614;" data-title="添加车辆信息"
+                            <!--写的后台路径-->
+                            <a href="javascript:;" data-url="vehicleadd.html" data-icon="&#xe614;" data-title="添加车辆信息"
                                kit-target data-id='7'><i class="layui-icon">&#xe614;</i><span> 添加车辆信息</span></a>
                         </dd>
                     </dl>
@@ -98,12 +95,13 @@
                     <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 路线管理</span></a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" data-url="route.jsp" data-icon="fa-user" data-title="查询路线信息" kit-target
+                            <a href="javascript:;" data-url="route.html" data-icon="fa-user" data-title="查询路线信息" kit-target
                                data-id='8'>
                                 <i class="fa fa-user" aria-hidden="true"></i><span> 查询路线信息</span></a>
                         </dd>
                         <dd>
-                            <a href="javascript:;" data-url="/route" data-icon="&#xe614;" data-title="添加路线信息"
+                            <!--写的后台路径-->
+                            <a href="javascript:;" data-url="routeadd.html" data-icon="&#xe614;" data-title="添加路线信息"
                                kit-target data-id='10'><i class="layui-icon">&#xe614;</i><span> 添加路线信息</span></a>
                         </dd>
                     </dl>
@@ -112,12 +110,13 @@
                     <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 运单管理</span></a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" data-url="waybill.jsp" data-icon="fa-user" data-title="查询运单信息" kit-target
+                            <a href="javascript:;" data-url="waybill.html" data-icon="fa-user" data-title="查询运单信息" kit-target
                                data-id='11'>
                                 <i class="fa fa-user" aria-hidden="true"></i><span> 查询运单信息</span></a>
                         </dd>
                         <dd>
-                            <a href="javascript:;" data-url="/waybill" data-icon="&#xe628;" data-title="添加运单信息" kit-target
+                            <!--写的后台路径-->
+                            <a href="javascript:;" data-url="waybilladd.html" data-icon="&#xe628;" data-title="添加运单信息" kit-target
                                data-id='12'><i class="layui-icon">&#xe628;</i><span> 添加运单信息</span></a>
                         </dd>
                         <dd>
@@ -161,23 +160,7 @@
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 权限分配</span></a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'navbar.html',icon:'&#xe658;',title:'Navbar',id:'6'}"><i
-                                class="layui-icon">&#xe658;</i><span> Navbar</span></a></dd>
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'tab.html',icon:'&#xe658;',title:'TAB',id:'7'}"><i class="layui-icon">&#xe658;</i><span> Tab</span></a>
-                        </dd>
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'onelevel.html',icon:'&#xe658;',title:'OneLevel',id:'50'}"><i
-                                class="layui-icon">&#xe658;</i><span> OneLevel</span></a></dd>
-                        <dd><a href="javascript:;" kit-target
-                               data-options="{url:'app.html',icon:'&#xe658;',title:'App',id:'8'}"><i class="layui-icon">&#xe658;</i><span> app.js主入口</span></a>
-                        </dd>
-                    </dl>
-                </li>
+
             </ul>
         </div>
     </div>
