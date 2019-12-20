@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.mapper.DeliveryMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Delivery">
+      select * from delivery_
+      <where>
+		<if test="param!=null and param.d_UID!=null and param.d_UID!=''">
+			and d_UID like "%"#{param.d_UID}"%"
+		</if>
+		<if test="param!=null and param.a_UID!=null and param.a_UID!=''">
+			and a_UID like "%"#{param.a_UID}"%"
+		</if>
+		<if test="param!=null and param.d_Phone!=null and param.d_Phone!=''">
+			and d_Phone like "%"#{param.d_Phone}"%"
+		</if>
+		<if test="param!=null and param.user_UID!=null and param.user_UID!=''">
+			and user_UID like "%"#{param.user_UID}"%"
+		</if>
+		<if test="param!=null and param.d_Remarks!=null and param.d_Remarks!=''">
+			and d_Remarks like "%"#{param.d_Remarks}"%"
+		</if>
+	</where>
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Delivery">
+       select Count(*) from Delivery_
+       <where>
+		<if test="d_UID!=null and d_UID!=''">
+			and d_UID like "%"#{d_UID}"%"
+		</if>
+		<if test="a_UID!=null and a_UID!=''">
+			and a_UID like "%"#{a_UID}"%"
+		</if>
+		<if test="d_Phone!=null and d_Phone!=''">
+			and d_Phone like "%"#{d_Phone}"%"
+		</if>
+		<if test="user_UID!=null and user_UID!=''">
+			and user_UID like "%"#{user_UID}"%"
+		</if>
+		<if test="d_Remarks!=null and d_Remarks!=''">
+			and d_Remarks like "%"#{d_Remarks}"%"
+		</if>
+	</where>
+    </select>
+
+    <update id="update" parameterType="Delivery">
+            update delivery_
+			<set>
+				<if test="a_UID!=null and a_UID!=''">
+					a_UID=#{a_UID},
+				</if>
+				<if test="d_Phone!=null and d_Phone!=''">
+					d_Phone=#{d_Phone},
+				</if>
+				<if test="quasi_Date!=null">
+					quasi_Date=#{quasi_Date},
+				</if>
+				<if test="user_UID!=null and user_UID!=''">
+					user_UID=#{user_UID},
+				</if>
+				<if test="d_Remarks!=null and d_Remarks!=''">
+					d_Remarks=#{d_Remarks},
+				</if>
+				<if test="state!=null">
+					state=#{state},
+				</if>
+				<if test="dateTime!=null">
+					dateTime=#{dateTime},
+				</if>
+			</set>
+			where d_UID=#{d_UID}
+    </update>
+
+    <insert id="save" parameterType="Delivery">
+         insert into delivery_ (d_UID,a_UID,d_Phone,quasi_Date,user_UID,d_Remarks,state,dateTime)  values(#{d_UID},#{a_UID},#{d_Phone},#{quasi_Date},#{user_UID},#{d_Remarks},#{state},#{dateTime});
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="String">
+        delete from delivery_ where d_UID=#{d_UID}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="String" resultType="Delivery">
+        select * from delivery_ where d_UID=#{d_UID}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Delivery" parameterType="Delivery">
+         select * from delivery_
+         <where>
+		<if test="d_UID!=null and d_UID!=''">
+			and d_UID like "%"#{d_UID}"%"
+		</if>
+		<if test="a_UID!=null and a_UID!=''">
+			and a_UID like "%"#{a_UID}"%"
+		</if>
+		<if test="d_Phone!=null and d_Phone!=''">
+			and d_Phone like "%"#{d_Phone}"%"
+		</if>
+		<if test="user_UID!=null and user_UID!=''">
+			and user_UID like "%"#{user_UID}"%"
+		</if>
+		<if test="d_Remarks!=null and d_Remarks!=''">
+			and d_Remarks like "%"#{d_Remarks}"%"
+		</if>
+	</where>
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="String">
+        delete from delivery_ where d_UID in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,7 @@
+package cn.xxct.oa_element.Prefix||service;
+
+import cn.xxct.oa_element.Prefix||domain.Demo;
+import cn.xxct.oa_element.service.BaseService;
+
+public interface DemoService extends BaseService<Demo>{
+}

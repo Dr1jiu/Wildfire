@@ -1,0 +1,19 @@
+server:
+  port: 81
+mybatis:
+  type-aliases-package: cn.xxct.oa_element.domain,cn.xxct.oa_element.inventory.domain,cn.xxct.oa_element.domain
+  config-location: classpath:mybatis/mybatis.config.xml
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml,mybatis/inventory/*Mapper.xml,mybatis/wlmapper/*Mapper.xml
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost/oa_element?serverTimezone=UTC&nullCatalogMeansCurrent=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+
+debug: true

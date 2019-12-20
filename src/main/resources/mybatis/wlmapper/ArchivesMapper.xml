@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.mapper.ArchivesMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Archives">
+      select * from archives_
+      <where>
+		<if test="param!=null and param.a_UID!=null and param.a_UID!=''">
+			and a_UID like "%"#{param.a_UID}"%"
+		</if>
+		<if test="param!=null and param.unit_Name!=null and param.unit_Name!=''">
+			and unit_Name like "%"#{param.unit_Name}"%"
+		</if>
+		<if test="param!=null and param.a_Address!=null and param.a_Address!=''">
+			and a_Address like "%"#{param.a_Address}"%"
+		</if>
+		<if test="param!=null and param.a_Phone!=null and param.a_Phone!=''">
+			and a_Phone like "%"#{param.a_Phone}"%"
+		</if>
+		<if test="param!=null and param.cp_UID!=null and param.cp_UID!=''">
+			and cp_UID like "%"#{param.cp_UID}"%"
+		</if>
+		<if test="param!=null and param.delivery_Name!=null and param.delivery_Name!=''">
+			and delivery_Name like "%"#{param.delivery_Name}"%"
+		</if>
+		<if test="param!=null and param.a_Sex!=null and param.a_Sex!=''">
+			and a_Sex like "%"#{param.a_Sex}"%"
+		</if>
+		<if test="param!=null and param.a_Emil!=null and param.a_Emil!=''">
+			and a_Emil like "%"#{param.a_Emil}"%"
+		</if>
+		<if test="param!=null and param.dm_UID!=null and param.dm_UID!=''">
+			and dm_UID like "%"#{param.dm_UID}"%"
+		</if>
+	</where>
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Archives">
+       select Count(*) from Archives_
+       <where>
+		<if test="a_UID!=null and a_UID!=''">
+			and a_UID like "%"#{a_UID}"%"
+		</if>
+		<if test="unit_Name!=null and unit_Name!=''">
+			and unit_Name like "%"#{unit_Name}"%"
+		</if>
+		<if test="a_Address!=null and a_Address!=''">
+			and a_Address like "%"#{a_Address}"%"
+		</if>
+		<if test="a_Phone!=null and a_Phone!=''">
+			and a_Phone like "%"#{a_Phone}"%"
+		</if>
+		<if test="cp_UID!=null and cp_UID!=''">
+			and cp_UID like "%"#{cp_UID}"%"
+		</if>
+		<if test="delivery_Name!=null and delivery_Name!=''">
+			and delivery_Name like "%"#{delivery_Name}"%"
+		</if>
+		<if test="a_Sex!=null and a_Sex!=''">
+			and a_Sex like "%"#{a_Sex}"%"
+		</if>
+		<if test="a_Emil!=null and a_Emil!=''">
+			and a_Emil like "%"#{a_Emil}"%"
+		</if>
+		<if test="dm_UID!=null and dm_UID!=''">
+			and dm_UID like "%"#{dm_UID}"%"
+		</if>
+	</where>
+    </select>
+
+    <update id="update" parameterType="Archives">
+            update archives_
+			<set>
+				<if test="unit_Name!=null and unit_Name!=''">
+					unit_Name=#{unit_Name},
+				</if>
+				<if test="a_Address!=null and a_Address!=''">
+					a_Address=#{a_Address},
+				</if>
+				<if test="a_Phone!=null and a_Phone!=''">
+					a_Phone=#{a_Phone},
+				</if>
+				<if test="cp_UID!=null and cp_UID!=''">
+					cp_UID=#{cp_UID},
+				</if>
+				<if test="delivery_Name!=null and delivery_Name!=''">
+					delivery_Name=#{delivery_Name},
+				</if>
+				<if test="a_Sex!=null and a_Sex!=''">
+					a_Sex=#{a_Sex},
+				</if>
+				<if test="a_Emil!=null and a_Emil!=''">
+					a_Emil=#{a_Emil},
+				</if>
+				<if test="dm_UID!=null and dm_UID!=''">
+					dm_UID=#{dm_UID},
+				</if>
+			</set>
+			where a_UID=#{a_UID}
+    </update>
+
+    <insert id="save" parameterType="Archives">
+         insert into archives_ (a_UID,unit_Name,a_Address,a_Phone,cp_UID,delivery_Name,a_Sex,a_Emil,dm_UID)  values(#{a_UID},#{unit_Name},#{a_Address},#{a_Phone},#{cp_UID},#{delivery_Name},#{a_Sex},#{a_Emil},#{dm_UID});
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="String">
+        delete from archives_ where a_UID=#{a_UID}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="String" resultType="Archives">
+        select * from archives_ where a_UID=#{a_UID}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Archives" parameterType="Archives">
+         select * from archives_
+         <where>
+		<if test="a_UID!=null and a_UID!=''">
+			and a_UID like "%"#{a_UID}"%"
+		</if>
+		<if test="unit_Name!=null and unit_Name!=''">
+			and unit_Name like "%"#{unit_Name}"%"
+		</if>
+		<if test="a_Address!=null and a_Address!=''">
+			and a_Address like "%"#{a_Address}"%"
+		</if>
+		<if test="a_Phone!=null and a_Phone!=''">
+			and a_Phone like "%"#{a_Phone}"%"
+		</if>
+		<if test="cp_UID!=null and cp_UID!=''">
+			and cp_UID like "%"#{cp_UID}"%"
+		</if>
+		<if test="delivery_Name!=null and delivery_Name!=''">
+			and delivery_Name like "%"#{delivery_Name}"%"
+		</if>
+		<if test="a_Sex!=null and a_Sex!=''">
+			and a_Sex like "%"#{a_Sex}"%"
+		</if>
+		<if test="a_Emil!=null and a_Emil!=''">
+			and a_Emil like "%"#{a_Emil}"%"
+		</if>
+		<if test="dm_UID!=null and dm_UID!=''">
+			and dm_UID like "%"#{dm_UID}"%"
+		</if>
+	</where>
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="String">
+        delete from archives_ where a_UID in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.mapper.Dynamic_MessageMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Dynamic_Message">
+      select * from dynamic_Message_
+      <where>
+		<if test="param!=null and param.dm_Invoice!=null and param.dm_Invoice!=''">
+			and dm_Invoice like "%"#{param.dm_Invoice}"%"
+		</if>
+		<if test="param!=null and param.dm_Products!=null and param.dm_Products!=''">
+			and dm_Products like "%"#{param.dm_Products}"%"
+		</if>
+		<if test="param!=null and param.dm_user_Id!=null and param.dm_user_Id!=''">
+			and dm_user_Id like "%"#{param.dm_user_Id}"%"
+		</if>
+		<if test="param!=null and param.dm_Name!=null and param.dm_Name!=''">
+			and dm_Name like "%"#{param.dm_Name}"%"
+		</if>
+		<if test="param!=null and param.cg_UID!=null and param.cg_UID!=''">
+			and cg_UID like "%"#{param.cg_UID}"%"
+		</if>
+		<if test="param!=null and param.dm_state!=null and param.dm_state!=''">
+			and dm_state like "%"#{param.dm_state}"%"
+		</if>
+		<if test="param!=null and param.dm_dateTime!=null and param.dm_dateTime!=''">
+			and dm_dateTime like "%"#{param.dm_dateTime}"%"
+		</if>
+	</where>
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Dynamic_Message">
+       select Count(*) from Dynamic_Message_
+       <where>
+		<if test="dm_Invoice!=null and dm_Invoice!=''">
+			and dm_Invoice like "%"#{dm_Invoice}"%"
+		</if>
+		<if test="dm_Products!=null and dm_Products!=''">
+			and dm_Products like "%"#{dm_Products}"%"
+		</if>
+		<if test="dm_user_Id!=null and dm_user_Id!=''">
+			and dm_user_Id like "%"#{dm_user_Id}"%"
+		</if>
+		<if test="dm_Name!=null and dm_Name!=''">
+			and dm_Name like "%"#{dm_Name}"%"
+		</if>
+		<if test="cg_UID!=null and cg_UID!=''">
+			and cg_UID like "%"#{cg_UID}"%"
+		</if>
+		<if test="dm_state!=null and dm_state!=''">
+			and dm_state like "%"#{dm_state}"%"
+		</if>
+		<if test="dm_dateTime!=null and dm_dateTime!=''">
+			and dm_dateTime like "%"#{dm_dateTime}"%"
+		</if>
+	</where>
+    </select>
+
+    <update id="update" parameterType="Dynamic_Message">
+            update dynamic_Message_
+			<set>
+				<if test="dm_Invoice!=null and dm_Invoice!=''">
+					dm_Invoice=#{dm_Invoice},
+				</if>
+				<if test="dm_Products!=null and dm_Products!=''">
+					dm_Products=#{dm_Products},
+				</if>
+				<if test="dm_user_Id!=null and dm_user_Id!=''">
+					dm_user_Id=#{dm_user_Id},
+				</if>
+				<if test="dm_Name!=null and dm_Name!=''">
+					dm_Name=#{dm_Name},
+				</if>
+				<if test="cg_UID!=null and cg_UID!=''">
+					cg_UID=#{cg_UID},
+				</if>
+				<if test="dm_state!=null and dm_state!=''">
+					dm_state=#{dm_state},
+				</if>
+				<if test="dm_dateTime!=null and dm_dateTime!=''">
+					dm_dateTime=#{dm_dateTime},
+				</if>
+			</set>
+			where dm_UID=#{dm_UID}
+    </update>
+
+    <insert id="save" parameterType="Dynamic_Message">
+         insert into dynamic_Message_ (dm_UID,dm_Invoice,dm_Products,dm_user_Id,dm_Name,cg_UID,dm_state,dm_dateTime)  values(#{dm_UID},#{dm_Invoice},#{dm_Products},#{dm_user_Id},#{dm_Name},#{cg_UID},#{dm_state},#{dm_dateTime});
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="Integer">
+        delete from dynamic_Message_ where dm_UID=#{dm_UID}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="Integer" resultType="Dynamic_Message">
+        select * from dynamic_Message_ where dm_UID=#{dm_UID}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Dynamic_Message" parameterType="Dynamic_Message">
+         select * from dynamic_Message_
+         <where>
+		<if test="dm_Invoice!=null and dm_Invoice!=''">
+			and dm_Invoice like "%"#{dm_Invoice}"%"
+		</if>
+		<if test="dm_Products!=null and dm_Products!=''">
+			and dm_Products like "%"#{dm_Products}"%"
+		</if>
+		<if test="dm_user_Id!=null and dm_user_Id!=''">
+			and dm_user_Id like "%"#{dm_user_Id}"%"
+		</if>
+		<if test="dm_Name!=null and dm_Name!=''">
+			and dm_Name like "%"#{dm_Name}"%"
+		</if>
+		<if test="cg_UID!=null and cg_UID!=''">
+			and cg_UID like "%"#{cg_UID}"%"
+		</if>
+		<if test="dm_state!=null and dm_state!=''">
+			and dm_state like "%"#{dm_state}"%"
+		</if>
+		<if test="dm_dateTime!=null and dm_dateTime!=''">
+			and dm_dateTime like "%"#{dm_dateTime}"%"
+		</if>
+	</where>
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="Integer">
+        delete from dynamic_Message_ where dm_UID in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

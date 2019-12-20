@@ -1,0 +1,12 @@
+package cn.xxct.oa_element.Prefix||mapper;
+
+
+import cn.xxct.oa_element.Prefix||domain.Demo;
+import cn.xxct.oa_element.utils.BaseMapper;
+
+import java.util.List;
+
+public interface DemoMapper extends BaseMapper<Demo> {
+
+
+}

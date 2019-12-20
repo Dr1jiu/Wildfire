@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.Prefix||mapper.DemoMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Demo">
+      select * from demo_
+      whereSql
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Demo">
+       select Count(*) from Demo_
+       whereMapper
+    </select>
+
+    <update id="update" parameterType="Demo">
+            updateSql
+    </update>
+
+    <insert id="save" parameterType="Demo">
+         InsertSql
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="IdType">
+        delete from demo_ where primaryId=#{primaryId}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="IdType" resultType="Demo">
+        select * from demo_ where primaryId=#{primaryId}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Demo" parameterType="Demo">
+         select * from demo_
+         whereMapper
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="IdType">
+        delete from demo_ where primaryId in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

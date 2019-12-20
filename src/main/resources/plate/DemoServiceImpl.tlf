@@ -1,0 +1,59 @@
+package cn.xxct.oa_element.Prefix||service.impl;
+
+import cn.xxct.oa_element.Prefix||domain.Demo;
+import cn.xxct.oa_element.Prefix||mapper.DemoMapper;
+import cn.xxct.oa_element.Prefix||service.DemoService;
+import cn.xxct.oa_element.utils.PageBean;
+import cn.xxct.oa_element.utils.PageUtils;
+import cn.xxct.oa_element.utils.ResultEntity;
+import cn.xxct.oa_element.utils.Success;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
+
+@Service
+public class DemoServiceImpl implements DemoService {
+
+    @Autowired
+    private DemoMapper demoMapper;
+
+    @Override
+    public ResultEntity findPage(Integer currentPage, Integer pageRows, Demo param) {
+        return PageUtils.findPage(currentPage, pageRows, demoMapper, param);
+    }
+
+    @Override
+    public ResultEntity save(Demo entity) {
+        ResultEntity resultEntity=Success.saveAllsuccess(demoMapper,entity);
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity delete(Demo demo) {
+        ResultEntity resultEntity = Success.deleteSingeSuccess(demoMapper, demo.getId());
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity update(Demo entity) {
+        ResultEntity result=Success.updateAllsuccess(demoMapper, entity);
+        return result;
+    }
+
+    @Override
+    public ResultEntity find(Serializable id) {
+        return Success.findSingle(demoMapper,id);
+    }
+
+    @Override
+    public ResultEntity findAll(Demo entity) {
+        return Success.findAllSuccess(demoMapper,entity);
+    }
+
+    @Override
+    public ResultEntity deleteMany(Long[] ids) {
+        ResultEntity resultEntity = Success.deleteAllsuccess(demoMapper, ids);
+        return resultEntity;
+    }
+}
