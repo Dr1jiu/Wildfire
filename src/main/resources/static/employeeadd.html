@@ -33,14 +33,13 @@
 <body>
 
 <div class="rigtop" >
-    ${param.msg}
 </div>
 <div class="rigbody" style="margin: auto">
     <form class="layui-form" method="get" action="/depart/add" >
         <div class="layui-form-item">
             <label class="layui-form-label">员工姓名：</label>
             <div class="layui-input-inline" >
-                <input type="text" name="staffName" value="${param.staffName}" maxlength="5" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input">
+                <input type="text" name="staff_name" value="" maxlength="5" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input">
             </div>
             <label class="layui-form-label">性   别：</label>
             <div class="layui-input-inline" >
@@ -56,21 +55,7 @@
             </div>
             <label class="layui-form-label">手机号码：</label>
             <div class="layui-input-inline">
-                <input type="text" name="phone" value="${param.phone}" maxlength="11" required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">部  门：</label>
-            <div class="layui-input-inline">
-                <select id="departs" name="dedpartNo">
-                </select>
-            </div>
-            <label class="layui-form-label">公  司：</label>
-            <div class="layui-input-inline">
-                <select id="firms" name="firmNo">
-
-                </select>
-
+                <input type="text" name="phone" value="" maxlength="11" required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -79,6 +64,21 @@
                 <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">部  门：</label>
+            <div class="layui-input-inline">
+                <select id="departs" name="dedpart_no">
+                </select>
+            </div>
+            <label class="layui-form-label">公  司：</label>
+            <div class="layui-input-inline">
+                <select id="firms" name="firm_no">
+
+                </select>
+
+            </div>
         </div>
 
         <div class="layui-form-item">
@@ -107,7 +107,7 @@
                 dataType: 'json'
                 ,success:function(data){//请求成功后的事件
                     $.each(data.data,function(index,obj){
-                        var option=$("<option value='"+obj.departNo+"'>"+obj.departName+"</option>");
+                        var option=$("<option>"+obj.depart_no+"</option>");
                         $("#departs").append(option);
                         form.render();
                     })
@@ -119,7 +119,7 @@
                 dataType: 'json',
                 success:function(data){//请求成功后的事件
                     $.each(data.data,function(index,obj){
-                        var option=$("<option value='"+obj.firmNo+"'>"+obj.firmName+"</option>");
+                        var option=$("<option>"+obj.firm_no+"</option>");
                         $("#firms").append(option);
                         form.render();
                     })

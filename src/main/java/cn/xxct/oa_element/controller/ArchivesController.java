@@ -13,6 +13,7 @@ import java.util.concurrent.locks.Lock;
 /**
  * @create 2019-12-19 16:22
  */
+@RequestMapping("/archives")
 @RestController
 public class ArchivesController {
 
