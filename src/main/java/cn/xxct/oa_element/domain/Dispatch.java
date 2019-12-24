@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Dispatch {
 
-    private Integer depart_no;
-    private String depart_name;
+    private Integer departNo;
+    private String departName;
 }

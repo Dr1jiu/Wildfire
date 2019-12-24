@@ -90,43 +90,43 @@
 <script src="js/jquery.js"></script>
 <script src="plugins/layui/layui.js"></script>
 <script>
-    $(function () {
-        layui.use(['form', 'layedit', 'laydate'], function(){
-            var form = layui.form
-                ,layer = layui.layer
-                ,layedit = layui.layedit
-                ,laydate = layui.laydate;
+$(function () {
+layui.use(['form', 'layedit', 'laydate'], function(){
+var form = layui.form
+,layer = layui.layer
+,layedit = layui.layedit
+,laydate = layui.laydate;
 
-            //日期
-            laydate.render({
-                elem: '#date'
-            });
-            $.ajax({
-                type:"get",
-                url:"/dispatch/select",//请求路径
-                dataType: 'json'
-                ,success:function(data){//请求成功后的事件
-                    $.each(data.data,function(index,obj){
-                        var option=$("<option>"+obj.depart_no+"</option>");
-                        $("#departs").append(option);
-                        form.render();
-                    })
-                }
-            })
-            $.ajax({
-                type:"get",
-                url:"/firm/select",//请求路径
-                dataType: 'json',
-                success:function(data){//请求成功后的事件
-                    $.each(data.data,function(index,obj){
-                        var option=$("<option>"+obj.firm_no+"</option>");
-                        $("#firms").append(option);
-                        form.render();
-                    })
-                }
-            })
-        });
-    })
+//日期
+laydate.render({
+elem: '#date'
+});
+$.ajax({
+type:"get",
+url:"/dispatch/select",//请求路径
+dataType: 'json'
+,success:function(data){//请求成功后的事件
+$.each(data.data,function(index,obj){
+var option=$("<option value='"+obj.departNo+"'>"+obj.departName+"</option>");
+$("#departs").append(option);
+form.render();
+})
+}
+})
+$.ajax({
+type:"get",
+url:"/firm/select",//请求路径
+dataType: 'json',
+success:function(data){//请求成功后的事件
+$.each(data.data,function(index,obj){
+var option=$("<option value='"+obj.firmNo+"'>"+obj.firmName+"</option>");
+$("#firms").append(option);
+form.render();
+})
+}
+})
+});
+})
 </script>
 </body>
 </html>

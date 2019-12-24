@@ -12,9 +12,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class Depart {
 
-    private Integer staff_no;
+    private Integer staffNo;
 
-    private String staff_name;
+    private String staffName;
 
     private String gender;
 
@@ -25,8 +25,8 @@ public class Depart {
 
     private String password;
 
-    private Integer dedpart_no;
+    private Integer dedpartNo;
 
-    private Integer firm_no;
+    private Integer firmNo;
 
 }

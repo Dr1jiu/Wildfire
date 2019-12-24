@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.mapper.ProducttMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Productt">
+      select * from productt_
+      <where>
+		<if test="param!=null and param.id!=null and param.id!=''">
+			and id like "%"#{param.id}"%"
+		</if>
+		<if test="param!=null and param.supplierId!=null and param.supplierId!=''">
+			and supplierId like "%"#{param.supplierId}"%"
+		</if>
+		<if test="param!=null and param.productname!=null and param.productname!=''">
+			and productname like "%"#{param.productname}"%"
+		</if>
+		<if test="param!=null and param.warranty!=null and param.warranty!=''">
+			and warranty like "%"#{param.warranty}"%"
+		</if>
+		<if test="param!=null and param.proid!=null and param.proid!=''">
+			and proid like "%"#{param.proid}"%"
+		</if>
+		<if test="param!=null and param.cpdw!=null and param.cpdw!=''">
+			and cpdw like "%"#{param.cpdw}"%"
+		</if>
+		<if test="param!=null and param.scdj!=null and param.scdj!=''">
+			and scdj like "%"#{param.scdj}"%"
+		</if>
+		<if test="param!=null and param.remark!=null and param.remark!=''">
+			and remark like "%"#{param.remark}"%"
+		</if>
+		<if test="param!=null and param.manufacturer!=null and param.manufacturer!=''">
+			and manufacturer like "%"#{param.manufacturer}"%"
+		</if>
+	</where>
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Productt">
+       select Count(*) from Productt_
+       <where>
+		<if test="id!=null and id!=''">
+			and id like "%"#{id}"%"
+		</if>
+		<if test="supplierId!=null and supplierId!=''">
+			and supplierId like "%"#{supplierId}"%"
+		</if>
+		<if test="productname!=null and productname!=''">
+			and productname like "%"#{productname}"%"
+		</if>
+		<if test="warranty!=null and warranty!=''">
+			and warranty like "%"#{warranty}"%"
+		</if>
+		<if test="proid!=null and proid!=''">
+			and proid like "%"#{proid}"%"
+		</if>
+		<if test="cpdw!=null and cpdw!=''">
+			and cpdw like "%"#{cpdw}"%"
+		</if>
+		<if test="scdj!=null and scdj!=''">
+			and scdj like "%"#{scdj}"%"
+		</if>
+		<if test="remark!=null and remark!=''">
+			and remark like "%"#{remark}"%"
+		</if>
+		<if test="manufacturer!=null and manufacturer!=''">
+			and manufacturer like "%"#{manufacturer}"%"
+		</if>
+	</where>
+    </select>
+
+    <update id="update" parameterType="Productt">
+            update productt_
+			<set>
+				<if test="supplierId!=null and supplierId!=''">
+					supplierId=#{supplierId},
+				</if>
+				<if test="productname!=null and productname!=''">
+					productname=#{productname},
+				</if>
+				<if test="warranty!=null and warranty!=''">
+					warranty=#{warranty},
+				</if>
+				<if test="proid!=null and proid!=''">
+					proid=#{proid},
+				</if>
+				<if test="cpdw!=null and cpdw!=''">
+					cpdw=#{cpdw},
+				</if>
+				<if test="scdj!=null and scdj!=''">
+					scdj=#{scdj},
+				</if>
+				<if test="remark!=null and remark!=''">
+					remark=#{remark},
+				</if>
+				<if test="manufacturer!=null and manufacturer!=''">
+					manufacturer=#{manufacturer},
+				</if>
+			</set>
+			where id=#{id}
+    </update>
+
+    <insert id="save" parameterType="Productt">
+         insert into productt_ (id,supplierId,productname,warranty,proid,cpdw,scdj,remark,manufacturer)  values(#{id},#{supplierId},#{productname},#{warranty},#{proid},#{cpdw},#{scdj},#{remark},#{manufacturer});
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="String">
+        delete from productt_ where id=#{id}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="String" resultType="Productt">
+        select * from productt_ where id=#{id}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Productt" parameterType="Productt">
+         select * from productt_
+         <where>
+		<if test="id!=null and id!=''">
+			and id like "%"#{id}"%"
+		</if>
+		<if test="supplierId!=null and supplierId!=''">
+			and supplierId like "%"#{supplierId}"%"
+		</if>
+		<if test="productname!=null and productname!=''">
+			and productname like "%"#{productname}"%"
+		</if>
+		<if test="warranty!=null and warranty!=''">
+			and warranty like "%"#{warranty}"%"
+		</if>
+		<if test="proid!=null and proid!=''">
+			and proid like "%"#{proid}"%"
+		</if>
+		<if test="cpdw!=null and cpdw!=''">
+			and cpdw like "%"#{cpdw}"%"
+		</if>
+		<if test="scdj!=null and scdj!=''">
+			and scdj like "%"#{scdj}"%"
+		</if>
+		<if test="remark!=null and remark!=''">
+			and remark like "%"#{remark}"%"
+		</if>
+		<if test="manufacturer!=null and manufacturer!=''">
+			and manufacturer like "%"#{manufacturer}"%"
+		</if>
+	</where>
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="String">
+        delete from productt_ where id in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

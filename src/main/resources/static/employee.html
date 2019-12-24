@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all">
-    <script type="text/javascript" src="js/bootstrap.js"></script>
     <style>
         .rigtop {
             width: 1140px;
@@ -35,7 +32,7 @@
         <div class="layui-inline">
             姓 名:
             <div class="layui-inline" style="width:190px">
-                <input class="layui-input" id="staff_name" autocomplete="off">
+                <input class="layui-input" id="staffName" autocomplete="off">
             </div>
             <div class="layui-inline">
                 <button class="layui-btn layui-btns layui-btn-normal" id="staffNamesele" data-type="getCheckData" >模糊查询</button>
@@ -44,220 +41,199 @@
         <div class="layui-inline">
             编 号:
             <div class="layui-inline" style="width:190px">
-                <input class="layui-input" name="name" id="staff_no" autocomplete="off">
+                <input class="layui-input" name="name" id="staffNo" autocomplete="off">
             </div>
             <div class="layui-inline">
                 <button class="layui-btn layui-btns layui-btn-normal" id="staffNosele" data-type="getCheckData" >查询</button>
             </div>
         </div>
+        <button class="layui-btn layui-btn-normal"   data-type="add">新建</button>
     </div>
 </div>
-<!-- 数据表格开始 -->
-<div>
-    <table class="layui-hide" id="noticeTable" lay-filter="noticeTable"></table>
-    <div id="noticeToolBar" style="display: none;">
-        <button type="button" lay-event="add" class="layui-btn layui-btn-sm"><span class="layui-icon layui-icon-add-1"></span>添加公告</button>
-        <button type="button" lay-event="batchDelete" class="layui-btn layui-btn-sm layui-btn-danger"><span class="layui-icon layui-icon-delete"></span>批量删除</button>
-    </div>
-
-    <div id="noticeRowBar" style="display: none;">
-        <button type="button" lay-event="update" class="layui-btn layui-btn-sm"><span class="layui-icon layui-icon-edit"></span>更新</button>
-        <button type="button" lay-event="delete" class="layui-btn layui-btn-sm layui-btn-danger"><span class="layui-icon layui-icon-delete"></span>删除</button>
-        <button type="button" lay-event="show" class="layui-btn layui-btn-sm"><span class="layui-icon layui-icon-about"></span>查看</button>
-    </div>
-</div>
-<!--显示table-->
 <div class="rigbody">
-<table id="demo" lay-filter="demo"  ></table>
+    <table id="demo" lay-filter="demo"  ></table>
 </div>
-
-
 <script type="text/html" id="barDemo">
-    <button type="button" lay-event="detail" id="detail" class="layui-btn layui-btn-sm"><span class="layui-icon layui-icon-edit"></span>更新</button>
-    <button type="button" lay-event="delete" class="layui-btn layui-btn-sm layui-btn-danger"><span class="layui-icon layui-icon-delete"></span>删除</button>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-
-</body>
-<form class="layui-form" id="bj" hidden="hidden" action="/depart/update">
-    <!--<input type="hidden" name="staff_no">-->
-    <div class="layui-form-item">
-        <label class="layui-form-label">编号：</label>
-        <div class="layui-input-inline" >
-            <input type="text" name="staff_no" value="" maxlength="5" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">员工姓名：</label>
-
-        <div class="layui-input-inline" >
-            <input type="text" name="staff_name" value="" maxlength="5" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">性   别：</label>
-        <div class="layui-input-inline" >
-            <input type="radio" name="gender" id="nan" value="男" title="男" checked="">
-            <input type="radio" name="gender" id="nv"value="女" title="女">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">出生日期：</label>
-        <div class="layui-input-inline">
-            <input type="date" name="birthhday" placeholder="yyyy-MM-dd HH:mm:ss" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">手机号码：</label>
-        <div class="layui-input-inline">
-            <input type="text" name="phone" value="" maxlength="11" required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">密  码：</label>
-        <div class="layui-input-inline">
-            <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
-        </div>
-        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">部  门：</label>
-        <div class="layui-input-inline">
-            <select id="departs" name="dedpart_no">
-            </select>
-        </div>
-        <label class="layui-form-label">公  司：</label>
-        <div class="layui-input-inline">
-            <select id="firms" name="firm_no">
-            </select>
-        </div>
-    </div>
-    <div>
-        <button type="submit" class="layui-btn layui-btn-sm layui-btn-normal" style="margin-left: 650px;margin-top: 50px;">修改</button>
-        <button class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top: 50px">关闭</button>
-    </div>
-</form>
-</body>
-</html>
 <script src="js/jquery.js"></script>
 <script src="plugins/layui/layui.js"></script>
+
 <script>
-    var table = null;
-    layui.use(['table'], function () {
-        table = layui.table;
-        //监听工具条
-        table.on('tool(demo)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'detail') {
-                $("input[name=staff_no]").val(data.staff_no);
-                $("input[name=staff_name]").val(data.staff_name);
-                $("input[name=birthhday]").val(data.birthhday);
-                $("input[name=phone]").val(data.phone);
-                $("input[name=password]").val(data.password);
-                $('#departs').find('option').each(function(){
-                    $(this).attr('selected',$(this).val()==data.dedpart_no);
-                });
-                $('#firms').find('option').each(function(){
-                    $(this).attr('selected',$(this).val()==data.firm_no);
-                });
-                data.gender=="男"?$("#nan").attr("checked",true):$("#nv").attr("checked",true)
-                form.render();
-                update(data.staff_no);
-            }
-        });
-//进行渲染
-        xrsj("json");
-    });
-</script>
-<script>
-    function xrsj(url) {
+    //执行渲染
+    layui.use(['table','layer','form'],function() {
+        // var data = document.getElementById("sj").value;
+        var table = layui.table;
+        var layer = layui.layer;
+        var form = layui.form;
+
         table.render({
             elem: '#demo'
-            , height: 451
+            , height: 500
             , page: true
-            , url: '/depart/json' //数据接口
+            , url: '/depart/json'//数据接口
             , cellMinWidth: 120
             , cols: [[ //表头
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'staff_no', title: '编号', align: 'center'}
-                , {field: 'staff_name', title: '姓名', align: 'center'}
-                , {field: 'gender', title: '性别', align: 'center'}
-                , {field: 'birthhday', title: '出生日期', align: 'center'}
-                , {field: 'phone', title: '手机号码', align: 'center'}
-                , {field: 'password', title: '密码', align: 'center'}
-                , {field: 'dedpart_no', title: '部门', align: 'center'}
-                , {field:'firm_no',title: '公司', align: 'center'}
-                , {field: 'right', title: '操作', width: '178', align: 'center',  toolbar: '#barDemo'}
-            ]],
-            id: "idsw"
+                ,{field: 'staffNo', title: '编号', align: 'center'}
+                ,{field: 'staffName', title: '姓名', align: 'center'}
+                ,{field: 'gender', title: '性别', align: 'center'}
+                ,{field: 'birthhday', title: '出生日期', align: 'center'}
+                ,{field: 'phone', title: '手机号码', align: 'center'}
+                ,{field: 'password', title: '密码', align: 'center'}
+                ,{field: 'dedpartNo', title: '部门', align: 'center'}
+                ,{field:'firmNo',title: '公司', align: 'center'}
+                ,{field: 'right', title: '操作', width: '178', align: 'center', toolbar: '#barDemo'}
+            ]]
+            ,page:'true'
+            , id: "testReload"
         });
-    }
+        //上方菜单操作栏(查询、以及  增加  按钮  )
+        var $ = layui.$, active = {
+            //查询
+            reload: function () {
+                var staffName = $('#staffName');//书籍类别名称 根据 id来取值
+                console.log(staffName.val());
+                // 执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1
+                        // 重新从第 1 页开始
+                    },
+                    where: {
+                        key: 'staffNo',
+                        staffNo: staffNo.val(),
+                    }
+                });
+            }, add: function () { //添加
+                layer.open({//弹出框
+                    type: 1,
+                    title: '添加员工信息',
+                    maxmin: true,
+                    shadeClose: true, //点击遮罩关闭层
+                    area: ['800px', '400px'],
+                    content: 'employeeadd.html',
+                    btn: ['确定', '取消'],
+                    yes: function (index, layero) {//确定执行函数
+                        console.log(layero);
+                        //执行添加方法
+                        $.post("/depart/add", {
+                            staffName:$("input[name=staffName]").val()
+                            ,gender:$("#nan").attr("checked")==true?"男":"女"
+                            , birthhday:$("input[name=birthhday]").val()
+                            , phone:$("input[name=phone]").val()
+                            , password:$("input[name=password]").val()
+                            , dedpartNo:$("select[name=dedpartNo]").val()
+                            , firmNo:$("select[name=firmNo]").val()
+                        }, function (data) {
+                            /*根据后台返回的参数来进行判断  */
+                            console.log("data"+data)
+                            if (data==1) {
+                                layer.alert('添加成功', {icon: 1, title: '提示'}, function (i) {
+                                    layer.close(i);
+                                    layer.close(index);//关闭弹出层
+                                    $("#booktype")[0].reset()//重置form
+                                })
+                                table.reload('testReload', {//重载表格
+                                    page: {
+                                        curr: 1
+                                        // 重新从第 1 页开始
+                                    }
+                                })
+                            } else if(data==2){
+                                layer.msg('添加失败,请勿重复添加书本类别名称')
+                            }
+                        })
 
-    function  update(staff_no) {
-        layer.open({
-            type: 1
-            , title: "编辑员工信息"
-            , content: $("#bj")
-            , area: ['800px', '400px']
-            //, btn: ['修改', '取消'] //只是为了演
-            , yes: function () {
-                $.ajax({
-                    type: "post"
-                    , url: "/depart/update"
-                    , dataType: 'json'
-                    ,contentType : 'application/json;charset=utf-8'
-                    ,data:JSON.stringify({
-                        staff_no:$("input[name=staff_no]").val()
-                        ,staff_name:$("input[name=staff_name]").val()
-                        ,gender:$("#nan").attr("checked")==true?"男":"女"
-                        ,birthhday:$("input[name=birthhday]").val()
-                        ,phone:$("input[name=phone]").val()
-                        ,password:$("input[name=password]").val()
-                        ,dedpart_no:$("select[name=dedpart_no]").val()
-                        ,firm_no:$("select[name=firm_no]").val()
-                    })
-                    , success: function (data) {
-                        layer.msg(data.msg, {time: 1000});
-                        if (data.code == 3) {
-                            setTimeout(function () {
-                                esc();
-                                table.reload('idsw');
-                            },500)
-                        }
+                    }, cancel: function (index, layero) {//取消
+                        $("#booktype")[0].reset()//重置form  根据id
+                        layer.close(index)
                     }
                 });
             }
-            , btn2: function () {
-                esc();
-            }, cancel: function (index, layero) {
-                esc()
-                return false;
+        }
+        $('.layui-form .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        /*表格 行内操作(编辑  以及  删除 按钮操作)  */
+        table.on('tool(demo)', function(obj) {
+            var data = obj.data; //获得当前行数据
+            // var urlex = document.getElementById("sj").value;
+            var tr = obj.tr//活动当前行tr 的  DOM对象
+            console.log(data);
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if(layEvent === 'del'){ //删除
+                layer.confirm('确定删除吗？',{title:'删除'}, function(index){
+                    //向服务端发送删除指令og
+                    $.post('/depart/delete',{staffNo:data.staffNo}, function(ret){
+                        layer.close(index);//关闭弹窗
+                        table.reload('testReload', {//重载表格
+                            page: {
+                                curr: 1
+                                // 重新从第 1 页开始
+                            }
+                        })
+                    });
+                    layer.close(index);
+                });
+            }else if(obj.event === 'edit') { //编辑
+                layer.open({
+                    type: 1 //Page层类型
+                    , skin: 'layui-layer-molv'
+                    , area: ['800px', '400px']
+                    , title: ['编辑员工信息', 'font-size:18px']
+                    , btn: ['确定', '取消']
+                    , shadeClose: true
+                    , shade: 0 //遮罩透明度
+                    , maxmin: true //允许全屏最小化
+                    , content: $('#box1')  //弹窗id
+                    , success: function (layero, index) {
+                        $("input[name=staffNo]").val(data.staff_no);
+                        $("input[name=staffName]").val(data.staff_name);
+                        $("input[name=birthhday]").val(data.birthhday);
+                        $("input[name=phone]").val(data.phone);
+                        $("input[name=password]").val(data.password);
+                        $('#departs').find('option').each(function(){
+                            $(this).attr('selected',$(this).val()==data.dedpartNo);
+                        });
+                        $('#firms').find('option').each(function(){
+                            $(this).attr('selected',$(this).val()==data.firmNo);
+                        });
+                        data.gender=="男"?$("#nan").attr("checked",true):$("#nv").attr("checked",true)
+                    }, yes: function (index, layero) {
+                        /*  $.ajaxSettings.async = false; */
+                        $.post('/depart/update', {
+                            staffNo:$("input[name=staffNo]").val()
+                            ,staffName:$("input[name=staffName]").val()
+                            ,gender:$("#nan").attr("checked")==true?"男":"女"
+                            , birthhday:$("input[name=birthhday]").val()
+                            , phone:$("input[name=phone]").val()
+                            , password:$("input[name=password]").val()
+                            , dedpartNo:$("select[name=dedpartNo]").val()
+                            , firmNo:$("select[name=firmNo]").val()
+                        }, function (data) {
+                            //根据后台返回的参数，来进行判断
+                            if (data > 0) {
+                                layer.alert('编辑成功', {icon: 1, title: '提示'}, function (i) {
+                                    layer.close(i);
+                                    layer.close(index);//关闭弹出层
+                                    $("#booktype")[0].reset()//重置form
+                                })
+                                table.reload('testReload', {//重载表格
+                                    page: {
+                                        curr: 1
+                                    }
+                                })
+                            }
+                        });
+                    }
+                });
             }
         });
-    }
-    $("#staffNosele").click(function () {
-        xrsj("ById/"+$("#staff_no").val());
-    })
-    $("#staffNamesele").click(function () {
-        xrsj("ByName/"+$("#staff_name").val());
-    })
-    //删除员工
-    //删除
-    function deleteNotice(data){
-        layer.confirm('你确定要删除【'+data.staff_name+'】这条公告吗?', {icon: 3, title:'提示'}, function(index){
-            $.post("/depart/delete",{staff_no:data.staff_no},function(res){
-                if(res.code==200){
-                    window.parent.location.reload();
-                }
-                layer.msg(res.msg);
-            })
-            layer.close(index);
-        });
-    }
-
-    //关闭回调事件
-    function esc() {
-        layer.closeAll();
-        $("input[name=staff_name]").val("");
-        $("input[name=phone]").val("");
-        $("input[name=password]").val("");
-        $("#bj").attr("hidden", "hidden").css("display", "none");
-    }
+    });
 </script>
 <script>
     //渲染下拉框
@@ -270,7 +246,7 @@
 
             //日期
             laydate.render({
-                elem: '#date'
+                elem: '#data'
             });
             $.ajax({
                 type:"get",
@@ -278,7 +254,7 @@
                 dataType: 'json'
                 ,success:function(data){//请求成功后的事件
                     $.each(data.data,function(index,obj){
-                        var option=$("<option value='"+obj.depart_no+"'>"+obj.depart_name+"</option>");
+                        var option=$("<option value='"+obj.departNo+"'>"+obj.departName+"</option>");
                         $("#departs").append(option);
                         form.render();
                     })
@@ -290,7 +266,7 @@
                 dataType: 'json',
                 success:function(data){//请求成功后的事件
                     $.each(data.data,function(index,obj){
-                        var option=$("<option value='"+obj.firm_no+"'>"+obj.firm_name+"</option>");
+                        var option=$("<option value='"+obj.firmNo+"'>"+obj.firmName+"</option>");
                         $("#firms").append(option);
                         form.render();
                     })
@@ -299,3 +275,59 @@
         });
     })
 </script>
+</body>
+<!--弹出层  -->
+<div class="site-text" style="margin: 5%; display: none" id="box1"  target="test123">
+    <form class="layui-form layui-form-pane" onsubmit="return false" id="booktype">
+        <div class="layui-form-item">
+            <label class="layui-form-label">员工编号：</label>
+            <div class="layui-input-inline" >
+                <input type="text" name="staffNo" value="<%=id%>" maxlength="5" required lay-verify="required" placeholder="请输入员工编号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">员工姓名：</label>
+            <div class="layui-input-inline" >
+                <input type="text" name="staffName" value="" maxlength="5" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label">性   别：</label>
+            <div class="layui-input-inline" >
+                <input type="radio" name="gender" id="nan" value="男" title="男" checked="">
+                <input type="radio" name="gender" id="nv"value="女" title="女">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">出生日期：</label>
+            <div class="layui-input-inline">
+                <input type="date" name="birthhday" placeholder="yyyy-MM-dd HH:mm:ss" id="birthhday" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label">手机号码：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="phone" value="" id="phone" maxlength="11" required lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">部  门：</label>
+            <div class="layui-input-inline">
+                <select id="departs" name="dedpartNo">
+                    <option selected="selected">-----请选择----</option>
+                </select>
+            </div>
+            <label class="layui-form-label">公  司：</label>
+            <div class="layui-input-inline">
+                <select id="firms" name="firmNo">
+                    <option selected="selected">-----请选择----</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密  码：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+        </div>
+    </form>
+</div>
+
+</html>

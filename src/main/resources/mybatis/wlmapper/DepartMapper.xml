@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.mapper.DepartMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Depart">
+      select * from depart_
+      <where>
+		<if test="param!=null and param.staffName!=null and param.staffName!=''">
+			and staffName like "%"#{param.staffName}"%"
+		</if>
+		<if test="param!=null and param.gender!=null and param.gender!=''">
+			and gender like "%"#{param.gender}"%"
+		</if>
+		<if test="param!=null and param.phone!=null and param.phone!=''">
+			and phone like "%"#{param.phone}"%"
+		</if>
+		<if test="param!=null and param.password!=null and param.password!=''">
+			and password like "%"#{param.password}"%"
+		</if>
+	</where>
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Depart">
+       select Count(*) from Depart_
+       <where>
+		<if test="staffName!=null and staffName!=''">
+			and staffName like "%"#{staffName}"%"
+		</if>
+		<if test="gender!=null and gender!=''">
+			and gender like "%"#{gender}"%"
+		</if>
+		<if test="phone!=null and phone!=''">
+			and phone like "%"#{phone}"%"
+		</if>
+		<if test="password!=null and password!=''">
+			and password like "%"#{password}"%"
+		</if>
+	</where>
+    </select>
+
+    <update id="update" parameterType="Depart">
+            update depart_
+			<set>
+				<if test="staffName!=null and staffName!=''">
+					staffName=#{staffName},
+				</if>
+				<if test="gender!=null and gender!=''">
+					gender=#{gender},
+				</if>
+				<if test="birthhday!=null">
+					birthhday=#{birthhday},
+				</if>
+				<if test="phone!=null and phone!=''">
+					phone=#{phone},
+				</if>
+				<if test="password!=null and password!=''">
+					password=#{password},
+				</if>
+				<if test="dedpartNo!=null">
+					dedpartNo=#{dedpartNo},
+				</if>
+				<if test="firmNo!=null">
+					firmNo=#{firmNo},
+				</if>
+			</set>
+			where staffNo=#{staffNo}
+    </update>
+
+    <insert id="save" parameterType="Depart">
+         insert into depart_ (staffNo,staffName,gender,birthhday,phone,password,dedpartNo,firmNo)  values(#{staffNo},#{staffName},#{gender},#{birthhday},#{phone},#{password},#{dedpartNo},#{firmNo});
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="Integer">
+        delete from depart_ where staffNo=#{staffNo}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="Integer" resultType="Depart">
+        select * from depart_ where staffNo=#{staffNo}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Depart" parameterType="Depart">
+         select * from depart_
+         <where>
+		<if test="staffName!=null and staffName!=''">
+			and staffName like "%"#{staffName}"%"
+		</if>
+		<if test="gender!=null and gender!=''">
+			and gender like "%"#{gender}"%"
+		</if>
+		<if test="phone!=null and phone!=''">
+			and phone like "%"#{phone}"%"
+		</if>
+		<if test="password!=null and password!=''">
+			and password like "%"#{password}"%"
+		</if>
+	</where>
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="Integer">
+        delete from depart_ where staffNo in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

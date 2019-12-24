@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.mapper.FirmMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Firm">
+      select * from firm_
+      <where>
+		<if test="param!=null and param.firmName!=null and param.firmName!=''">
+			and firmName like "%"#{param.firmName}"%"
+		</if>
+	</where>
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Firm">
+       select Count(*) from Firm_
+       <where>
+		<if test="firmName!=null and firmName!=''">
+			and firmName like "%"#{firmName}"%"
+		</if>
+	</where>
+    </select>
+
+    <update id="update" parameterType="Firm">
+            update firm_
+			<set>
+				<if test="firmName!=null and firmName!=''">
+					firmName=#{firmName},
+				</if>
+			</set>
+			where firmNo=#{firmNo}
+    </update>
+
+    <insert id="save" parameterType="Firm">
+         insert into firm_ (firmNo,firmName)  values(#{firmNo},#{firmName});
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="Integer">
+        delete from firm_ where firmNo=#{firmNo}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="Integer" resultType="Firm">
+        select * from firm_ where firmNo=#{firmNo}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Firm" parameterType="Firm">
+         select * from firm_
+         <where>
+		<if test="firmName!=null and firmName!=''">
+			and firmName like "%"#{firmName}"%"
+		</if>
+	</where>
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="Integer">
+        delete from firm_ where firmNo in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Firm {
 
-    private Integer firm_no;
-    private String firm_name;
+    private Integer firmNo;
+    private String firmName;
 }

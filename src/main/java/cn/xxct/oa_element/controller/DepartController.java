@@ -44,13 +44,15 @@ public class DepartController {
 
     @RequestMapping("/update")
     public ResultEntity update(Depart depart){
-        System.out.println(depart.getStaff_no());
+        System.out.println(depart.getStaffNo());
         return departService.update(depart);
     }
 
     @RequestMapping("/delete")
     public ResultEntity delete(Depart depart){
-        return departService.delete(depart);
+        ResultEntity entity = departService.delete(depart);
+        System.out.println(depart.getStaffNo()+"-------------->");
+        return entity;
     }
 
 

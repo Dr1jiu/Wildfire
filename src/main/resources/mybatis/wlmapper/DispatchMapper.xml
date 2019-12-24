@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xxct.oa_element.mapper.DispatchMapper">
+
+    <sql id="page">
+      limit #{currentPage},#{pageRows}
+    </sql>
+
+    <!--
+        用户查询分页
+    -->
+    <select id="findPageList" resultType="Dispatch">
+      select * from dispatch_
+      <where>
+		<if test="param!=null and param.departName!=null and param.departName!=''">
+			and departName like "%"#{param.departName}"%"
+		</if>
+	</where>
+      <include refid="page"/>
+    </select>
+    <select id="getTotalCount" resultType="Integer" parameterType="Dispatch">
+       select Count(*) from Dispatch_
+       <where>
+		<if test="departName!=null and departName!=''">
+			and departName like "%"#{departName}"%"
+		</if>
+	</where>
+    </select>
+
+    <update id="update" parameterType="Dispatch">
+            update dispatch_
+			<set>
+				<if test="departName!=null and departName!=''">
+					departName=#{departName},
+				</if>
+			</set>
+			where departNo=#{departNo}
+    </update>
+
+    <insert id="save" parameterType="Dispatch">
+         insert into dispatch_ (departNo,departName)  values(#{departNo},#{departName});
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="Integer">
+        delete from dispatch_ where departNo=#{departNo}
+    </delete>
+
+    <!--查询单个-->
+    <select id="find" parameterType="Integer" resultType="Dispatch">
+        select * from dispatch_ where departNo=#{departNo}
+    </select>
+
+    <!--查询全部不带条件-->
+    <select id="findAll" resultType="Dispatch" parameterType="Dispatch">
+         select * from dispatch_
+         <where>
+		<if test="departName!=null and departName!=''">
+			and departName like "%"#{departName}"%"
+		</if>
+	</where>
+    </select>
+
+    <!--删除多个-->
+    <delete id="deleteMany" parameterType="Integer">
+        delete from dispatch_ where departNo in
+        <foreach collection="array" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
