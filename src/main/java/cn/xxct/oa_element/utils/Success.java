@@ -39,6 +39,7 @@ public class Success {
     public static <T> ResultEntity updateAllsuccess(BaseMapper mapper, T entity) {
         try {
             Integer num = mapper.update(entity);
+            System.out.println(entity+"--------->");
             return ResultEntity.successNoData();
         } catch (Exception e) {
             e.printStackTrace();

@@ -14,10 +14,10 @@ public class SourceGenerator {
     public static void main(String[] args) throws Exception {
         //测试生成保存sql语句
         //String s = testSave("cn.xxct.oa_element.domain.Dept");
-        generService("Delivery", "");
-        generQuery("Delivery", "");
-        generMapperxml("Delivery", "wlmapper", "cn.xxct.oa_element.domain.Delivery");
-        generServiceImpl("Delivery", "");
+        generService("Firm", "");
+        generQuery("Firm", "");
+        generMapperxml("Firm", "wlmapper", "cn.xxct.oa_element.domain.Firm");
+        generServiceImpl("Firm", "");
 //        String s = whereParam("cn.xxct.oa_element.domain.Dept");
 //        System.out.println(s);
         //updateSql("cn.xxct.oa_element.domain.Admin");

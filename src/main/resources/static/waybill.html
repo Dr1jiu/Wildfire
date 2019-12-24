@@ -34,7 +34,7 @@
         <div class="layui-inline">
             运单号:
             <div class="layui-inline" style="width:190px">
-                <input class="layui-input" id="waybillNo" autocomplete="off">
+                <input class="layui-input" id="waybill_no" autocomplete="off">
             </div>
             <div class="layui-inline">
                 <button class="layui-btn layui-btns layui-btn-normal" id="waybillNosele" data-type="getCheckData">模糊查询
@@ -44,7 +44,7 @@
         <div class="layui-inline">
             发件人手机:
             <div class="layui-inline" style="width:190px">
-                <input class="layui-input" name="name" id="sPhone" autocomplete="off">
+                <input class="layui-input" name="name" id="s_phone" autocomplete="off">
             </div>
             <div class="layui-inline">
                 <button class="layui-btn layui-btns layui-btn-normal" id="sPhonesele" data-type="getCheckData">查询
@@ -54,7 +54,7 @@
         <div class="layui-inline">
             收件人手机:
             <div class="layui-inline" style="width:190px">
-                <input class="layui-input" name="name" id="rPhone" autocomplete="off">
+                <input class="layui-input" name="name" id="r_phone" autocomplete="off">
             </div>
             <div class="layui-inline">
                 <button class="layui-btn layui-btns layui-btn-normal" id="rPhonesele" data-type="getCheckData">查询
@@ -80,20 +80,20 @@
         table.on('tool(demo)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-                $("input[name=waybillNo]").val(data.waybillNo);
+                $("input[name=waybill_no]").val(data.waybill_no);
                 $("input[name=number]").val(data.number);
-                $("input[name=unit]").val(data.unit);
-                $("input[name=sName]").val(data.sName);
-                $("input[name=rName]").val(data.rName);
-                $("input[name=sPro]").val(data.sPro);
-                $("input[name=sCity]").val(data.sCity);
-                $("input[name=ePro]").val(data.ePro);
-                $("input[name=eCity]").val(data.eCity);
-                $("input[name=sAddress]").val(data.sAddress);
-                $("input[name=sPhone]").val(data.sPhone);
-                $("input[name=rPhone]").val(data.rPhone);
-                $("input[name=rAddress]").val(data.rAddress);
-                update(data.waybillNo);
+                $("input[name=s_name]").val(data.s_name);
+                $("input[name=s_phone]").val(data.s_phone);
+                $("input[name=s_address]").val(data.s_address);
+                $("input[name=r_name]").val(data.r_name);
+                $("input[name=r_phone]").val(data.r_phone);
+                $("input[name=r_address]").val(data.r_address);
+                $("input[name=time]").val(data.time);
+                // $("input[name=sAddress]").val(data.sAddress);
+                // $("input[name=sPhone]").val(data.sPhone);
+                // $("input[name=rPhone]").val(data.rPhone);
+                // $("input[name=rAddress]").val(data.rAddress);
+                update(data.waybill_no);
             }
         });
         //进行渲染
@@ -103,16 +103,16 @@
 <script>
 
     $("#waybillNosele").click(function () {
-        xrsj("waybillNo/" + $("#waybillNo").val());
+        xrsj("waybillNo/" + $("#waybill_no").val());
     })
     $("#sPhonesele").click(function () {
-        xrsj("sPhonesele/" + $("#sPhone").val());
+        xrsj("sPhonesele/" + $("#s_phone").val());
     })
     $("#rPhonesele").click(function () {
-        xrsj("rPhonesele/" + $("#rPhone").val());
+        xrsj("rPhonesele/" + $("#r_phone").val());
     })
 
-    function update(waybillNo) {
+    function update(waybill_no) {
         layer.open({
             type: 1
             , title: "编辑员工信息"
@@ -122,23 +122,23 @@
             , yes: function () {
                 $.ajax({
                     type: "post"
-                    , url: "/waybill/update"
+                    , url: "/waybill/waybillupdate"
                     , dataType: 'json'
                     , contentType: 'application/json;charset=utf-8'
                     , data: JSON.stringify({
-                        waybillNo:  $("input[name=waybillNo]").val(),
+                        waybill_no: $("input[name=waybill_no]").val(),
                         number: $("input[name=number]").val(),
-                        unit: $("input[name=unit]").val(),
-                        sName: $("input[name=sName]").val(),
-                        rName: $("input[name=rName]").val(),
-                        sPro: $("input[name=sPro]").val(),
-                        sCity: $("input[name=sCity]").val(),
-                        ePro: $("input[name=ePro]").val(),
-                        eCity: $("input[name=eCity]").val(),
-                        sAddress: $("input[name=sAddress]").val(),
+                        s_name: $("input[name=s_name]").val(),
+                        s_phone: $("input[name=s_phone]").val(),
+                        s_address: $("input[name=s_address]").val(),
+                        r_name: $("input[name=r_name]").val(),
+                        r_phone: $("input[name=r_phone]").val(),
+                        r_address: $("input[name=r_address]").val(),
+                        time: $("input[name=time]").val(),
+                      /*  sAddress: $("input[name=sAddress]").val(),
                         sPhone: $("input[name=sPhone]").val(),
                         rPhone: $("input[name=rPhone]").val(),
-                        rAddress: $("input[name=rAddress]").val()
+                        rAddress: $("input[name=rAddress]").val()*/
                     })
                     ,
                     success: function (data) {
@@ -173,17 +173,19 @@
             elem: '#demo'
             , height: 451
             , page: true
-            , url: '/waybill/' + url //数据接口
+            , url: '/waybill/waybilljson'//数据接口
             , cellMinWidth: 130
             , cols: [[ //表头
                 {type: 'numbers', title: '序号'}
-                , {field: 'waybillNo', title: '运单号', align: 'center'}
+                , {field: 'waybill_no', title: '运单号', align: 'center'}
                 , {field: 'number', title: '数量', align: 'center'}
-                , {field: 'unit', title: '单位', align: 'center'}
-                , {field: 'sName', title: '发件人姓名', align: 'center'}
-                , {field: 'sPhone', title: '发件人手机', align: 'center'}
-                , {field: 'rName', title: '收件人姓名', align: 'center'}
-                , {field: 'rPhone', title: '收件人手机', align: 'center'}
+                , {field: 's_name', title: '单位', align: 'center'}
+                , {field: 's_phone', title: '发件人姓名', align: 'center'}
+                , {field: 's_address', title: '发件人手机', align: 'center'}
+                , {field: 'r_name', title: '收件人姓名', align: 'center'}
+                , {field: 'r_phone', title: '收件人手机', align: 'center'}
+                , {field: 'r_address', title: '地址', align: 'center'}
+                , {field: 'time', title: '时间', align: 'center'}
                 , {field: 'right', title: '操作', width: '178', align: 'center', toolbar: '#barDemo'}
             ]]
             , id: "idsw"
@@ -194,7 +196,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">运单号</label>
         <div class="layui-input-inline">
-            <input type="text" readonly="readonly" name="waybillNo" maxlength="11" required lay-verify="required"
+            <input type="text" readonly="readonly" name="waybill_no" maxlength="11" required lay-verify="required"
                    placeholder="请输入运单号码" autocomplete="off" class="layui-input">
         </div>
         <label class="layui-form-label">数 量</label>
@@ -204,24 +206,24 @@
         </div>
         <label class="layui-form-label">单 位</label>
         <div class="layui-input-inline">
-            <input type="text" name="unit" maxlength="11" required lay-verify="required" placeholder="请输入单位"
+            <input type="text" name="s_name" maxlength="11" required lay-verify="required" placeholder="请输入单位"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">发件人</label>
         <div class="layui-input-inline">
-            <input type="text" name="sName" maxlength="11" required lay-verify="required" placeholder="请输入发件人姓名"
+            <input type="text" name="s_phone" maxlength="11" required lay-verify="required" placeholder="请输入发件人姓名"
                    autocomplete="off" class="layui-input">
         </div>
         <label class="layui-form-label">起始省份</label>
         <div class="layui-input-inline">
-            <input type="text" name="sPro" maxlength="11" required lay-verify="required" placeholder="请输入起始省份"
+            <input type="text" name="s_address" maxlength="11" required lay-verify="required" placeholder="请输入起始省份"
                    autocomplete="off" class="layui-input">
         </div>
         <label class="layui-form-label">起始城市</label>
         <div class="layui-input-inline">
-            <input type="text" name="sCity" maxlength="11" required lay-verify="required" placeholder="请输入起始城市"
+            <input type="text" name="r_name" maxlength="11" required lay-verify="required" placeholder="请输入起始城市"
                    autocomplete="off" class="layui-input">
         </div>
 
@@ -229,46 +231,46 @@
     <div class="layui-form-item">
         <label class="layui-form-label">收件人</label>
         <div class="layui-input-inline">
-            <input type="text" name="rName" maxlength="11" required lay-verify="required" placeholder="请输入收件人姓名"
+            <input type="text" name="r_phone" maxlength="11" required lay-verify="required" placeholder="请输入收件人姓名"
                    autocomplete="off" class="layui-input">
         </div>
         <label class="layui-form-label">目的省份</label>
         <div class="layui-input-inline">
-            <input type="text" name="ePro" maxlength="11" required lay-verify="required" placeholder="请输入目的省份"
+            <input type="text" name="r_address" maxlength="11" required lay-verify="required" placeholder="请输入目的省份"
                    autocomplete="off" class="layui-input">
         </div>
         <label class="layui-form-label">目的城市</label>
         <div class="layui-input-inline">
-            <input type="text" name="eCity" maxlength="11" required lay-verify="required" placeholder="请输入目的城市"
+            <input type="text" name="time" maxlength="11" required lay-verify="required" placeholder="请输入目的城市"
                    autocomplete="off" class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">发件地址</label>
-        <div class="layui-input-inline">
-            <input type="text" name="sAddress" maxlength="11" required lay-verify="required" placeholder="请输入发件地址"
-                   autocomplete="off" class="layui-input">
-        </div>
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">发件地址</label>-->
+        <!--<div class="layui-input-inline">-->
+            <!--<input type="text" name="sAddress" maxlength="11" required lay-verify="required" placeholder="请输入发件地址"-->
+                   <!--autocomplete="off" class="layui-input">-->
+        <!--</div>-->
 
 
-        <label class="layui-form-label">发件手机</label>
-        <div class="layui-input-inline">
-            <input type="text" name="sPhone" maxlength="11" required lay-verify="required" placeholder="请输入发件人手机"
-                   autocomplete="off" class="layui-input">
-        </div>
-        <label class="layui-form-label">收件手机</label>
-        <div class="layui-input-inline">
-            <input type="text" name="rPhone" maxlength="11" required lay-verify="required" placeholder="请输入收件人手机"
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">收件地址</label>
-        <div class="layui-input-block">
-            <input type="text" name="rAddress" maxlength="11" required lay-verify="required" placeholder="请输入收件地址"
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
+        <!--<label class="layui-form-label">发件手机</label>-->
+        <!--<div class="layui-input-inline">-->
+            <!--<input type="text" name="sPhone" maxlength="11" required lay-verify="required" placeholder="请输入发件人手机"-->
+                   <!--autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+        <!--<label class="layui-form-label">收件手机</label>-->
+        <!--<div class="layui-input-inline">-->
+            <!--<input type="text" name="rPhone" maxlength="11" required lay-verify="required" placeholder="请输入收件人手机"-->
+                   <!--autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label">收件地址</label>-->
+        <!--<div class="layui-input-block">-->
+            <!--<input type="text" name="rAddress" maxlength="11" required lay-verify="required" placeholder="请输入收件地址"-->
+                   <!--autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+    <!--</div>-->
 
 </form>
 </body>

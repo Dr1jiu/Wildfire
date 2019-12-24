@@ -8,12 +8,23 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost/oa_element?serverTimezone=UTC&nullCatalogMeansCurrent=true&characterEncoding=UTF-8&allowMultiQueries=true
+    #oa_element
+    url: jdbc:mysql://localhost/text?serverTimezone=UTC&nullCatalogMeansCurrent=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
   http:
     encoding:
       charset: utf-8
       enabled: true
       force: true
-
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    cache: false
 debug: true

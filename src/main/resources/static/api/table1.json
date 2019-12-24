@@ -1,0 +1,117 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 1000,
+  "data": [
+    {
+      "staffNo": 10000,
+      "staffName": "user-0",
+      "gender": "女",
+      "birthhday": "城市-0",
+      "phone": "签名-0",
+      "password": 255,
+      "dedpart_no": 24,
+      "firm_no": 82830700
+    },
+    {
+      "staffNo": 10001,
+      "staffName": "user-1",
+      "gender": "女",
+      "birthhday": "城市-1",
+      "phone": "签名-1",
+      "password": 255,
+      "dedpart_no": 24,
+      "firm_no": 82830700
+    },
+    {
+      "staffNo": 10002,
+      "staffName": "user-2",
+      "gender": "女",
+      "birthhday": "城市-2",
+      "phone": "签名-2",
+      "password": 255,
+      "dedpart_no": 24,
+      "firm_no": 82830700
+    },
+    {
+      "staffNo": 10000,
+      "staffName": "user-0",
+      "gender": "女",
+      "birthhday": "城市-0",
+      "phone": "签名-0",
+      "password": 255,
+      "dedpart_no": 24,
+      "firm_no": 82830700
+    },
+    {
+      "staffNo": 10000,
+      "staffName": "user-0",
+      "gender": "女",
+      "birthhday": "城市-0",
+      "phone": "签名-0",
+      "password": 255,
+      "dedpart_no": 24,
+      "firm_no": 82830700
+    },
+    {
+      "id": 10005,
+      "username": "user-5",
+      "sex": "女",
+      "city": "城市-5",
+      "sign": "签名-5",
+      "experience": 173,
+      "logins": 68,
+      "wealth": 60344147,
+      "classify": "作家",
+      "score": 87
+    },
+    {
+      "id": 10006,
+      "username": "user-6",
+      "sex": "女",
+      "city": "城市-6",
+      "sign": "签名-6",
+      "experience": 982,
+      "logins": 37,
+      "wealth": 57768166,
+      "classify": "作家",
+      "score": 34
+    },
+    {
+      "id": 10007,
+      "username": "user-7",
+      "sex": "男",
+      "city": "城市-7",
+      "sign": "签名-7",
+      "experience": 727,
+      "logins": 150,
+      "wealth": 82030578,
+      "classify": "作家",
+      "score": 28
+    },
+    {
+      "id": 10008,
+      "username": "user-8",
+      "sex": "男",
+      "city": "城市-8",
+      "sign": "签名-8",
+      "experience": 951,
+      "logins": 133,
+      "wealth": 16503371,
+      "classify": "词人",
+      "score": 14
+    },
+    {
+      "id": 10009,
+      "username": "user-9",
+      "sex": "女",
+      "city": "城市-9",
+      "sign": "签名-9",
+      "experience": 484,
+      "logins": 25,
+      "wealth": 86801934,
+      "classify": "词人",
+      "score": 75
+    }
+  ]
+}
