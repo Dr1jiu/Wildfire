@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@MapperScan("cn.xxct.oa_element.mapper")
+@MapperScan("cn.xxct.oa_element.mapper,cn.xxct.oa_element.service.impl")
 @SpringBootApplication
 public class ErpfbApplication {
 

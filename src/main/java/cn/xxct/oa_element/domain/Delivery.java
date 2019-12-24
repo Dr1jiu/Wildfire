@@ -16,11 +16,11 @@ public class Delivery implements Serializable, AuthCachePrincipal {
     private String d_UID;
     private String a_UID;
     private String d_Phone;
-    private Date quasi_Date;
+    private String quasi_Date;
     private String user_UID;
     private String d_Remarks;
-    private Character state;
-    private Date dateTime;
+    private String state;
+    private String dateTime;
 
     @Override
     public String getAuthCacheKey() {

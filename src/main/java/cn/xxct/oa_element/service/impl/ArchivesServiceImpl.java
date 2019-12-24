@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArchivesServiceImpl implements ArchivesService {
@@ -55,5 +57,10 @@ public class ArchivesServiceImpl implements ArchivesService {
     public ResultEntity deleteMany(Long[] ids) {
         ResultEntity resultEntity = Success.deleteAllsuccess(archivesMapper, ids);
         return resultEntity;
+    }
+
+    @Override
+    public List<Map> getAll(Archives archives) {
+        return archivesMapper.getAll(archives);
     }
 }

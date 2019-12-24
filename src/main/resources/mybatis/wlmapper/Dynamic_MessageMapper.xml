@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.xxct.oa_element.mapper.Dynamic_MessageMapper">
+<mapper namespace="cn.xxct.oa_element.mapper.DynamicMessageMapper">
 
     <sql id="page">
       limit #{currentPage},#{pageRows}
@@ -91,9 +91,18 @@
 			where dm_UID=#{dm_UID}
     </update>
 
-    <insert id="save" parameterType="Dynamic_Message">
-         insert into dynamic_Message_ (dm_UID,dm_Invoice,dm_Products,dm_user_Id,dm_Name,cg_UID,dm_state,dm_dateTime)  values(#{dm_UID},#{dm_Invoice},#{dm_Products},#{dm_user_Id},#{dm_Name},#{cg_UID},#{dm_state},#{dm_dateTime});
+    <insert id="save" parameterType="Dynamic_Message" keyColumn="id" keyProperty="dm_UID" useGeneratedKeys="true">
+		insert into dynamic_Message_ (dm_UID,dm_Invoice,dm_Products,dm_user_Id,dm_Name,cg_UID,dm_state,dm_dateTime)  values(null
+		,#{dm_Invoice},#{dm_Products},#{dm_user_Id},#{dm_Name},#{cg_UID},#{dm_state},#{dm_dateTime});
     </insert>
+
+	<insert id="addDm" parameterType="Dynamic_Message" >
+		insert into dynamic_Message_ (dm_UID,dm_Invoice,dm_Products,dm_user_Id,dm_Name,cg_UID,dm_state,dm_dateTime)  values(null
+		,#{dm_Invoice},#{dm_Products},#{dm_user_Id},#{dm_Name},#{cg_UID},#{dm_state},#{dm_dateTime});
+		<selectKey resultType="int" keyProperty="dm_UID" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 
     <!--删除-->
     <delete id="delete" parameterType="Integer">

@@ -19,6 +19,8 @@ public class Archives implements  Serializable, AuthCachePrincipal {
     private String a_Sex;
     private String a_Emil;
     private String dm_UID;
+    private String state;
+    private String dateTime;
 
 
     @Override

@@ -102,12 +102,18 @@
 				<if test="dm_UID!=null and dm_UID!=''">
 					dm_UID=#{dm_UID},
 				</if>
+				<if test="state!=null and state!=''">
+					state=#{state},
+				</if>
+				<if test="dateTime!=null and dateTime!=''">
+					dateTime=#{dateTime},
+				</if>
 			</set>
 			where a_UID=#{a_UID}
     </update>
 
     <insert id="save" parameterType="Archives">
-         insert into archives_ (a_UID,unit_Name,a_Address,a_Phone,cp_UID,delivery_Name,a_Sex,a_Emil,dm_UID)  values(#{a_UID},#{unit_Name},#{a_Address},#{a_Phone},#{cp_UID},#{delivery_Name},#{a_Sex},#{a_Emil},#{dm_UID});
+         insert into archives_ (a_UID,unit_Name,a_Address,a_Phone,cp_UID,delivery_Name,a_Sex,a_Emil,dm_UID,state,dateTime)  values(#{a_UID},#{unit_Name},#{a_Address},#{a_Phone},#{cp_UID},#{delivery_Name},#{a_Sex},#{a_Emil},#{dm_UID},#{state},#{dateTime});
     </insert>
 
     <!--删除-->
@@ -154,6 +160,11 @@
 	</where>
     </select>
 
+	<select id="getAll" resultType="map" parameterType="Archives">
+		select * from archives_
+		inner join  dynamic_Message_
+		WHERE archives_.dm_UID = dynamic_Message_.dm_UID
+	</select>
     <!--删除多个-->
     <delete id="deleteMany" parameterType="String">
         delete from archives_ where a_UID in
