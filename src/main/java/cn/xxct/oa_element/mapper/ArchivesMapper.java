@@ -10,4 +10,6 @@ import java.util.Map;
 public interface ArchivesMapper extends BaseMapper<Archives> {
 
     List<Map> getAll(Archives archives);
+
+
 }

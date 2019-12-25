@@ -8,4 +8,5 @@ import java.util.Map;
 
 public interface ArchivesService extends BaseService<Archives>{
     List<Map> getAll(Archives archives);
+
 }

@@ -3,14 +3,16 @@ package cn.xxct.oa_element.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.crazycake.shiro.AuthCachePrincipal;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Depart {
+public class Depart implements Serializable, AuthCachePrincipal {
 
     private Integer staffNo;
 
@@ -29,4 +31,8 @@ public class Depart {
 
     private Integer firmNo;
 
+    @Override
+    public String getAuthCacheKey() {
+        return null;
+    }
 }

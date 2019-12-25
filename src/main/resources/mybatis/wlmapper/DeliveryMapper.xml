@@ -83,6 +83,9 @@
          insert into delivery_ (d_UID,a_UID,d_Phone,quasi_Date,user_UID,d_Remarks,state,dateTime)  values(#{d_UID},#{a_UID},#{d_Phone},#{quasi_Date},#{user_UID},#{d_Remarks},#{state},#{dateTime});
     </insert>
 
+	<insert id="zJian" parameterType="map">
+         insert into peisong_shangp (d_UID,s_UID,dateTime) values(#{d_UID},#{s_UID},#{dateTime});
+    </insert>
     <!--删除-->
     <delete id="delete" parameterType="String">
         delete from delivery_ where d_UID=#{d_UID}

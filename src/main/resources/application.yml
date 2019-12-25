@@ -3,7 +3,7 @@ server:
 mybatis:
   type-aliases-package: cn.xxct.oa_element.domain,cn.xxct.oa_element.inventory.domain,cn.xxct.oa_element.domain
   config-location: classpath:mybatis/mybatis.config.xml
-  mapper-locations: classpath:mybatis/mapper/*Mapper.xml,mybatis/inventory/*Mapper.xml,mybatis/wlmapper/*Mapper.xml
+  mapper-locations: classpath:mybatis/wlmapper/*Mapper.xml
 spring:
   datasource:
     username: root
@@ -11,6 +11,8 @@ spring:
     #oa_element
     url: jdbc:mysql://localhost/oa_element?serverTimezone=UTC&nullCatalogMeansCurrent=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
+#    hikari:
+#      jdbc-url: jdbc:mysql://localhost/oa_element?serverTimezone=UTC&nullCatalogMeansCurrent=true&characterEncoding=UTF-8
   http:
     encoding:
       charset: utf-8
@@ -18,10 +20,7 @@ spring:
       force: true
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.H2Dialect
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html

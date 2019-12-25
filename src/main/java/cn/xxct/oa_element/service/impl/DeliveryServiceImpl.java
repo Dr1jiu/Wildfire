@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Map;
 
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
@@ -55,5 +56,10 @@ public class DeliveryServiceImpl implements DeliveryService {
     public ResultEntity deleteMany(Long[] ids) {
         ResultEntity resultEntity = Success.deleteAllsuccess(deliveryMapper, ids);
         return resultEntity;
+    }
+
+    @Override
+    public Integer zJian(Map map) {
+        return deliveryMapper.zJian(map);
     }
 }

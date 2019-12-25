@@ -3,6 +3,9 @@ package cn.xxct.oa_element.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.crazycake.shiro.AuthCachePrincipal;
+
+import java.io.Serializable;
 
 /**
  * @create 2019-12-24 9:32
@@ -10,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Productt {
+public class Productt implements Serializable, AuthCachePrincipal {
 
     private String id;
     private String supplierId;
@@ -22,4 +25,8 @@ public class Productt {
     private String remark;
     private String manufacturer;
 
+    @Override
+    public String getAuthCacheKey() {
+        return null;
+    }
 }

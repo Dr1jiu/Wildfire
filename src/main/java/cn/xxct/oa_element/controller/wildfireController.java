@@ -1,6 +1,7 @@
 package cn.xxct.oa_element.controller;
 
 import cn.xxct.oa_element.domain.Archives;
+import cn.xxct.oa_element.domain.Delivery;
 import cn.xxct.oa_element.domain.Dynamic_Message;
 import cn.xxct.oa_element.mapper.DynamicMessageMapper;
 import cn.xxct.oa_element.service.ArchivesService;
@@ -9,13 +10,11 @@ import cn.xxct.oa_element.service.DynamicMessageService;
 import cn.xxct.oa_element.service.impl.DynamicMessageServiceImpl;
 import cn.xxct.oa_element.utils.MYUtil;
 import cn.xxct.oa_element.utils.ResultEntity;
+import org.activiti.engine.impl.util.json.JSONArray;
 import org.activiti.engine.impl.util.json.JSONObject;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -66,10 +65,31 @@ public class wildfireController {
     @RequestMapping("/getAllA")
     public Map getAll(){
         Archives ar = new Archives();
-//        ar.setA_UID(A_UID);
         Map map = new HashMap();
         map.put("data",archivesService.getAll(ar));
         return map;
     }
+    @RequestMapping("/getAID")
+    public ResultEntity getAID(@RequestParam String A_UID){
+        return archivesService.find(A_UID);
+    }
+
+    @RequestMapping("/addPS")
+    public ResultEntity addPeiSong(@RequestParam JSONArray js,@RequestParam Delivery delivery){
+        delivery.setD_UID(MYUtil.getUUID());
+        if (deliveryService.save(delivery).getResult()!=null){
+            List<String> list = (List) js;
+            Map map = new HashMap();
+            map.put("d_UID",delivery.getD_UID());
+            for (String a: list
+                 ) {
+            map.put("s_UID",a);
+            map.put("dateTime",MYUtil.getDateTime());
+                System.out.println(deliveryService.zJian(map));
+            }
+        }
+        return null;
+    }
+
 
 }
