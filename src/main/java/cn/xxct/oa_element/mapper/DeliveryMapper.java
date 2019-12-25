@@ -10,4 +10,8 @@ import java.util.Map;
 public interface DeliveryMapper extends BaseMapper<Delivery> {
 
     Integer zJian(Map map);
+
+    List<Delivery> gitAll(Delivery entity);
+
+    List<Map> getAllA(Delivery entity);
 }

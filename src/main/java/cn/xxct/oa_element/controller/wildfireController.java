@@ -63,8 +63,9 @@ public class wildfireController {
         return archivesService.delete(ar);
     }
     @RequestMapping("/getAllA")
-    public Map getAll(){
+    public Map getAll(@RequestParam String state){
         Archives ar = new Archives();
+        ar.setState(state);
         Map map = new HashMap();
         map.put("data",archivesService.getAll(ar));
         return map;
@@ -75,21 +76,67 @@ public class wildfireController {
     }
 
     @RequestMapping("/addPS")
-    public ResultEntity addPeiSong(@RequestParam JSONArray js,@RequestParam Delivery delivery){
+    public ResultEntity addPeiSong(@RequestParam List list ,@RequestParam Delivery delivery){
         delivery.setD_UID(MYUtil.getUUID());
+        String UID = MYUtil.getUUID();
+        delivery.setLinshi_UID(UID);
         if (deliveryService.save(delivery).getResult()!=null){
-            List<String> list = (List) js;
             Map map = new HashMap();
             map.put("d_UID",delivery.getD_UID());
-            for (String a: list
+            map.put("zheko",UID);
+            for (Object a: list
                  ) {
             map.put("s_UID",a);
             map.put("dateTime",MYUtil.getDateTime());
                 System.out.println(deliveryService.zJian(map));
             }
+            return ResultEntity.successWithData("ko");
         }
         return null;
     }
 
+    @RequestMapping("/getPeiSong")
+    public Map getPeiSong(@RequestParam Delivery delivery){
+        Map map = new HashMap();
+        map.put("delivery",deliveryService.gitAll(delivery));
+
+//        if (deliveryService.save(delivery).getResult()!=null){
+//            Map map = new HashMap();
+//            map.put("d_UID",delivery.getD_UID());
+//            map.put("zheko",delivery.getD_UID());
+//            for (Object a: list
+//            ) {
+//                map.put("s_UID",a);
+//                map.put("dateTime",MYUtil.getDateTime());
+//                System.out.println(deliveryService.zJian(map));
+//            }
+//            return ResultEntity.successWithData("ko");
+//        }
+        return map;
+    }
+    @RequestMapping("/getXX")
+    public Map getXiangXi(@RequestParam String UID){
+        Map map = new HashMap();
+        Delivery delivery = deliveryService.finds(UID);
+        if (delivery == null){
+            return null;
+        }
+        map.put("dly",delivery);
+        List<Map> maps = deliveryService.getAllA(delivery);
+        map.put("List",map);
+//        if (deliveryService.save(delivery).getResult()!=null){
+//            Map map = new HashMap();
+//            map.put("d_UID",delivery.getD_UID());
+//            map.put("zheko",delivery.getD_UID());
+//            for (Object a: list
+//            ) {
+//                map.put("s_UID",a);
+//                map.put("dateTime",MYUtil.getDateTime());
+//                System.out.println(deliveryService.zJian(map));
+//            }
+//            return ResultEntity.successWithData("ko");
+//        }
+        return map;
+    }
 
 }

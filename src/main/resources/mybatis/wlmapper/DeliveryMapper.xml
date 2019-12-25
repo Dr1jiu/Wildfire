@@ -84,7 +84,7 @@
     </insert>
 
 	<insert id="zJian" parameterType="map">
-         insert into peisong_shangp (d_UID,s_UID,dateTime) values(#{d_UID},#{s_UID},#{dateTime});
+         insert into peisong_shangp (d_UID,s_UID,dateTime,zheko) values(#{d_UID},#{s_UID},#{dateTime},#{zheko});
     </insert>
     <!--删除-->
     <delete id="delete" parameterType="String">
@@ -117,6 +117,32 @@
 		</if>
 	</where>
     </select>
+	<select id="gitAll" resultType="Delivery" parameterType="Delivery">
+		select * from delivery_
+		<where>
+			<if test="d_UID!=null and d_UID!=''">
+				and d_UID like "%"#{d_UID}"%"
+			</if>
+			<if test="a_UID!=null and a_UID!=''">
+				and a_UID like "%"#{a_UID}"%"
+			</if>
+			<if test="d_Phone!=null and d_Phone!=''">
+				and d_Phone like "%"#{d_Phone}"%"
+			</if>
+			<if test="user_UID!=null and user_UID!=''">
+				and user_UID like "%"#{user_UID}"%"
+			</if>
+			<if test="d_Remarks!=null and d_Remarks!=''">
+				and d_Remarks like "%"#{d_Remarks}"%"
+			</if>
+			<if test="state!=null and state!=''">
+			and state like "%"#{state}"%"
+			</if>
+			<if test="dateTime!=null and dateTime!=''">
+				and dateTime like "%"#{dateTime}"%"
+			</if>
+		</where>
+	</select>
 
     <!--删除多个-->
     <delete id="deleteMany" parameterType="String">
@@ -125,4 +151,17 @@
             #{id}
         </foreach>
     </delete>
+
+
+
+	<select id="getAllA" resultType="map" parameterType="Delivery">
+		select * from peisong_shangp
+		inner join  productt_
+		WHERE peisong_shangp.s_UID = productt_.id
+			and d_UID=#{d_UID}
+			and zheko=#{linshi_UID}
+		<if test="state!=null and state!=''">
+			and state=#{state}
+		</if>
+	</select>
 </mapper>

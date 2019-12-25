@@ -15,6 +15,7 @@ public class Delivery implements Serializable, AuthCachePrincipal {
     //配送
     private String d_UID;
     private String a_UID;
+    private String linshi_UID;
     private String d_Phone;
     private String quasi_Date;
     private String user_UID;

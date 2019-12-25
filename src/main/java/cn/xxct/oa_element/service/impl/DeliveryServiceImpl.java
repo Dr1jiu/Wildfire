@@ -3,7 +3,6 @@ package cn.xxct.oa_element.service.impl;
 import cn.xxct.oa_element.domain.Delivery;
 import cn.xxct.oa_element.mapper.DeliveryMapper;
 import cn.xxct.oa_element.service.DeliveryService;
-import cn.xxct.oa_element.utils.PageBean;
 import cn.xxct.oa_element.utils.PageUtils;
 import cn.xxct.oa_element.utils.ResultEntity;
 import cn.xxct.oa_element.utils.Success;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -59,7 +59,21 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public Integer zJian(Map map) {
-        return deliveryMapper.zJian(map);
+    public ResultEntity zJian(Map map) {
+
+        return ResultEntity.successWithData(deliveryMapper.zJian(map));
+    }
+
+    @Override
+    public List<Delivery> gitAll(Delivery entity) {
+        return deliveryMapper.gitAll(entity);
+    }
+    public List<Map> getAllA(Delivery entity){
+        return deliveryMapper.getAllA(entity);
+    }
+
+    @Override
+    public Delivery finds(Serializable id) {
+        return deliveryMapper.find(id);
     }
 }

@@ -164,6 +164,9 @@
 		select * from archives_
 		inner join  dynamic_Message_
 		WHERE archives_.dm_UID = dynamic_Message_.dm_UID
+		<if test="state!=null and state!=''">
+			state=#{state}
+		</if>
 	</select>
     <!--删除多个-->
     <delete id="deleteMany" parameterType="String">
